@@ -1,5 +1,10 @@
 from database.setup import create_tables
 from database.connection import get_db_connection
+# `from models.article import Article` is importing the `Article` class from the `article` module
+# within the `models` package. This allows you to use the `Article` class in your current Python
+# script. The `Article` class likely represents the structure and behavior of an article entity in
+# your application, and by importing it, you can create instances of the `Article` class and work with
+# article objects in your script.
 from models.article import Article
 from models.author import Author
 from models.magazine import Magazine
@@ -66,5 +71,9 @@ def main():
     for article in articles:
         print(Article(article["id"], article["title"], article["content"], article["author_id"], article["magazine_id"]))
 
+    #   # Update functionality example
+    # new_author_name = input("Enter new name for the author: ")
+    # author.update_name(new_author_name)
+    
 if __name__ == "__main__":
     main()
