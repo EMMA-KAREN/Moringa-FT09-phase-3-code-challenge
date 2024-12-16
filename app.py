@@ -9,6 +9,46 @@ from models.article import Article
 from models.author import Author
 from models.magazine import Magazine
 
+def delete_record():
+    """
+    Provides the user with options to delete a magazine, author, or article from the database.
+    """
+    print("\nDelete Options:")
+    print("1. Delete Magazine")
+    print("2. Delete Author")
+    print("3. Delete Article")
+    choice = input("Enter your choice (1/2/3): ")
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    try:
+        if choice == "1":
+            magazine_id = input("Enter the ID of the magazine to delete: ")
+            cursor.execute("DELETE FROM magazines WHERE id = ?", (magazine_id,))
+            print(f"Magazine with ID {magazine_id} deleted successfully.")
+
+        elif choice == "2":
+            author_id = input("Enter the ID of the author to delete: ")
+            cursor.execute("DELETE FROM authors WHERE id = ?", (author_id,))
+            print(f"Author with ID {author_id} deleted successfully.")
+
+        elif choice == "3":
+            article_id = input("Enter the ID of the article to delete: ")
+            cursor.execute("DELETE FROM articles WHERE id = ?", (article_id,))
+            print(f"Article with ID {article_id} deleted successfully.")
+
+        else:
+            print("Invalid choice. Please enter 1, 2, or 3.")
+
+        conn.commit()
+
+    except Exception as e:
+        print(f"An error occurred while deleting the record: {e}")
+
+    finally:
+        conn.close()
+
 def main():
     # Initialize the database and create tables
     create_tables()
@@ -75,5 +115,7 @@ def main():
     # new_author_name = input("Enter new name for the author: ")
     # author.update_name(new_author_name)
     
+    # Delete records
+    delete_record()
 if __name__ == "__main__":
     main()

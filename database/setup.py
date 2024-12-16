@@ -25,7 +25,7 @@ def create_tables():
             author_id INTEGER,
             magazine_id INTEGER,
             FOREIGN KEY (author_id) REFERENCES authors (id),
-            FOREIGN KEY (magazine_id) REFERENCES magazines (id)
+            FOREIGN KEY (magazine_id) REFERENCES magazines (id) on delete cascade
         )
     ''')
 
